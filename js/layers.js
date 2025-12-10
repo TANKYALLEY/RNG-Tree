@@ -6,7 +6,7 @@ function createLayers() {
 		let layersInRow = RNG_DATA.layers(r);
 		for (let l=1;l<=layersInRow;l++) {
 			let rand = random(seed*random(r*l));
-			let layerName = RNG_DATA.chars[Math.floor(rand*RNG_DATA.chars.length)] + RNG_DATA.chars[Math.floor(rand*RNG_DATA.chars.length)];
+			let layerName = RNG_DATA.chars[Math.floor(rand*RNG_DATA.chars.length)]  +  RNG_DATA.chars[Math.floor(rand*RNG_DATA.chars.length)];
 			RNG_DATA.chars = RNG_DATA.chars.filter(x => x!=layerName);
 			let baseResNum = (r==1?0:Math.floor(rand*(Object.keys(ROW_LAYERS[r-1]).length+1)));
 			let baseResName = (baseResNum==0?"":Object.keys(ROW_LAYERS[r-1])[baseResNum-1]);
