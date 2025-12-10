@@ -12,42 +12,62 @@ function RNGReset() {
 }
 
 const RNG_DATA = {
-	rows: 5,
+	rows: 10,
 	minLayers: 1,
-	maxLayers: 5,
+	maxLayers: 10,
 	layers(row) { 
 		let l = Math.max(Math.min(Math.floor(random(getSeed()*row)*RNG_DATA.maxLayers+1), RNG_DATA.maxLayers), RNG_DATA.minLayers);
 		return Math.min(l, row);		
 	},
-	chars: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()'.split(''),
+	chars: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()'.split('') + 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()'.split(''),
 	types: ["normal", "static"],
 	rowReqs: {
 		1: new Decimal(10),
 		2: new Decimal(1e6),
-		3: new Decimal(1e25),
-		4: new Decimal(1e80),
-		5: new Decimal(1e300),
+		3: new Decimal(1e12),
+		4: new Decimal(1e25),
+		5: new Decimal(1e50),
+		6: new Decimal(1e80),
+		7: new Decimal(1e120),
+		8: new Decimal(1e180),
+		9: new Decimal(1e240),
+		10: new Decimal(1e300),
 	},
 	rowBaseExps: {
-		1: new Decimal(0.5),
-		2: new Decimal(0.25),
-		3: new Decimal(0.01),
-		4: new Decimal(0.0025),
-		5: new Decimal(0.001),
+		1: new Decimal(0.75),
+		2: new Decimal(0.5),
+		3: new Decimal(0.25),
+		4: new Decimal(0.15),
+		5: new Decimal(0.1),
+		6: new Decimal(0.05),
+		7: new Decimal(0.025),
+		8: new Decimal(0.01),
+		9: new Decimal(0.0025),
+		10: new Decimal(0.001),
 	},
 	staticRowBaseExps: {
 		1: new Decimal(1),
-		2: new Decimal(1.2),
+		2: new Decimal(1.25),
 		3: new Decimal(1.5),
-		4: new Decimal(2),
-		5: new Decimal(2.5),
+		4: new Decimal(1.75),
+		5: new Decimal(2),
+		6: new Decimal(2.25),
+		7: new Decimal(2.5),
+		8: new Decimal(2.75),
+		9: new Decimal(3),
+		10: new Decimal(3.5),
 	},
 	rowLayerTotalMultExps: {
 		1: new Decimal(0.5),
-		2: new Decimal(0.75),
-		3: new Decimal(0.875),
-		4: new Decimal(0.95),
-		5: new Decimal(0.98),
+		2: new Decimal(0.6),
+		3: new Decimal(0.75),
+		4: new Decimal(0.8),
+		5: new Decimal(0.875),
+		6: new Decimal(0.925),
+		7: new Decimal(0.95),
+		8: new Decimal(0.98),
+		9: new Decimal(0.99),
+		10: new Decimal(1),
 	},
 }
 
@@ -101,4 +121,5 @@ function globalBuyableEffect(target) {
 		}
 	}
 	return eff;
+
 }
