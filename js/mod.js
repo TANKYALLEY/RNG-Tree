@@ -1,7 +1,7 @@
 let modInfo = {
 	name: "The RNG Tree",
 	id: "rng_madness",
-	author: "RNGeezus",
+	author: "Tankyalley | Credits to Jacorb90",
 	pointsName: "points",
 	discordName: "",
 	discordLink: "",
