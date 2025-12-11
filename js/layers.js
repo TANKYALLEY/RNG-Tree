@@ -6,7 +6,7 @@ function createLayers() {
 		let layersInRow = RNG_DATA.layers(r);
 		for (let l=1;l<=layersInRow;l++) {
 			let rand = random(seed*random(r*l));
-			let rander = random(seed*random(r*2));
+			let rander = random(seed*random((r+1)*1));
 			let layerName = RNG_DATA.chars[Math.floor(rand*RNG_DATA.chars.length)] + RNG_DATA.chars[Math.floor(rander*RNG_DATA.chars.length)];
 			RNG_DATA.chars = RNG_DATA.chars.filter(x => x!=layerName);
 			let baseResNum = (r==1?0:Math.floor(rand*(Object.keys(ROW_LAYERS[r-1]).length+1)));
@@ -53,17 +53,18 @@ function createLayers() {
 			if (r>1) layerInfo.branches = [Object.keys(ROW_LAYERS[r-1])[l-1] || Object.keys(ROW_LAYERS[r-1])[Object.keys(ROW_LAYERS[r-1]).length-1]];
 			
 			if (layerType=="normal") {
-				let gainExpFactor = (rand+1.5)/3
+				let gainExpFactor = (rand+1.25)/3
 				layerInfo.exponent = RNG_DATA.rowBaseExps[r].times(gainExpFactor);
 			} else if (layerType=="static") {
-				let reqExpFactor = (rand+1.5)/3
+				let reqExpFactor = (rand+1.25)/3
 				layerInfo.base = layerInfo.requires.sqrt().div(5).plus(1);
 				layerInfo.exponent = RNG_DATA.staticRowBaseExps[r].times(reqExpFactor);
 			}
 			
 			layerInfo.hasEffect = (r==1?true:(!(!Math.round(rand))))
-			let hasUpgrades = rand<=0.7
-			let hasBuyables = rand>=0.3
+			let hasUpgrades = rand<=0.8
+			let hasBuyables = rand>=0.4
+			let hasMilestones = rand>=0.3
 			layerInfo.overallFactor = 1/layersInRow
 			layerInfo.nonEffectFactor = (hasUpgrades||hasBuyables)?((rand+1)/(layerInfo.type=="static"?5:3)):0
 			
@@ -76,7 +77,7 @@ function createLayers() {
 					if (et == "NONE") exp = new Decimal(1);
 					else exp = tmp[et].exponent;
 					if (tmp[l] === undefined) return new Decimal(1);
-					let eff = new Decimal(player[l].points||0).max(0.5).plus(1)
+					let eff = new Decimal(player[l].points||0).max(2).plus(1)
 					if (tmp[l].type=="static") eff = Decimal.pow(tmp[l].base, eff.sub(1)).pow(tmp[l].exponent);
 					else eff = eff.root(tmp[l].exponent);
 					
@@ -98,8 +99,8 @@ function createLayers() {
 			if (hasUpgrades) {
 				let uLeft = layerInfo.nonEffectFactor/(hasBuyables?2:1);
 				layerInfo.upgrades = {
-					rows: Math.floor(random(rand*seed)*Math.min(layerInfo.row+1, 4)+1),
-					cols: Math.floor(random((1-rand)*seed)*Math.min(layerInfo.row+1, 4)+1),
+					rows: Math.floor(random(rand*seed)*Math.min(layerInfo.row+1, 7)+1),
+					cols: Math.floor(random((1-rand)*seed)*Math.min(layerInfo.row+1, 7)+1),
 				}
 				for (let upgRow=1;upgRow<=layerInfo.upgrades.rows;upgRow++) {
 					for (let upgCol=1;upgCol<=layerInfo.upgrades.cols;upgCol++) {
@@ -126,7 +127,7 @@ function createLayers() {
 								let amt;
 								if (this.sourceName == "NONE") amt = player.points;
 								else amt = player[this.sourceName].points;
-								eff = new Decimal(amt||0).max(0.5).plus(1)
+								eff = new Decimal(amt||0).max(4).plus(1)
 								if (this.sourceName!="NONE" ? tmp[this.sourceName].type=="static" : false) eff = Decimal.pow(tmp[this.sourceName].base, eff).pow(tmp[this.sourceName].exponent).pow(exp).pow(RNG_DATA.rowLayerTotalMultExps[tmp[this.layer].row].times(this.iuf))
 								else eff = eff.root((this.sourceName=="NONE")?1:tmp[this.sourceName].exponent).pow(exp).pow(RNG_DATA.rowLayerTotalMultExps[tmp[this.layer].row].times(this.iuf)) 
 								return eff;
@@ -141,8 +142,8 @@ function createLayers() {
 			if (hasBuyables) {
 				let uLeft = layerInfo.nonEffectFactor/(hasUpgrades?2:1);
 				layerInfo.buyables = {
-					rows: Math.floor(random(rand*Math.pow(seed, 2))*Math.min(layerInfo.row+1, 3)+1),
-					cols: Math.floor(random((1-rand)*Math.pow(seed, 2))*Math.min(layerInfo.row+1, 3)+1),
+					rows: Math.floor(random(rand*Math.pow(seed, 2))*Math.min(layerInfo.row+1, 5)+1),
+					cols: Math.floor(random((1-rand)*Math.pow(seed, 2))*Math.min(layerInfo.row+1, 5)+1),
 				}
 				for (let bRow=1;bRow<=layerInfo.buyables.rows;bRow++) {
 					for (let bCol=1;bCol<=layerInfo.buyables.cols;bCol++) {
@@ -183,7 +184,7 @@ function createLayers() {
 							},
 							effect() { 
 								let exp;
-								if (this.et == "NONE") exp = new Decimal(1);
+								if (this.et == "NONE") exp = new Decimal(2);
 								else exp = tmp[this.et].exponent;
 								let bought = player[this.layer].buyables[this.id];
 								eff = layers[this.layer].buyables[this.id].cost(bought.sub(1)).times(bought.gte(1)?bought.min(5):0).plus(bought.gte(1)?0:1).root(tmp[this.layer].exponent).pow(exp).pow(RNG_DATA.rowLayerTotalMultExps[tmp[this.layer].row].times(this.iuf))
@@ -194,7 +195,6 @@ function createLayers() {
 					}
 				}
 			}
-			
 			addLayer(layerName, layerInfo)
 		}
 	}
