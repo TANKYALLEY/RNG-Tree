@@ -63,7 +63,7 @@ function createLayers() {
 			
 			layerInfo.hasEffect = (r==1?true:(!(!Math.round(rand))))
 			let hasUpgrades = rand<=0.8
-			let hasBuyables = rand>=0.4
+			let hasBuyables = rand>=0.8
 			let hasMilestones = rand>=0.3
 			layerInfo.overallFactor = 1/layersInRow
 			layerInfo.nonEffectFactor = (hasUpgrades||hasBuyables)?((rand+1)/(layerInfo.type=="static"?5:3)):0
@@ -187,7 +187,7 @@ function createLayers() {
 								if (this.et == "NONE") exp = new Decimal(2);
 								else exp = tmp[this.et].exponent;
 								let bought = player[this.layer].buyables[this.id];
-								eff = layers[this.layer].buyables[this.id].cost(bought.sub(1)).times(bought.gte(1)?bought.min(5):0).plus(bought.gte(1)?0:1).root(tmp[this.layer].exponent).pow(exp).pow(RNG_DATA.rowLayerTotalMultExps[tmp[this.layer].row].times(this.iuf))
+								eff = layers[this.layer].buyables[this.id].cost(bought.sub(1)).times(bought.gte(1)?bought.min(5):0).plus(bought.gte(1)?0:1).root(tmp[this.layer].exponent).pow(exp*exp).pow(RNG_DATA.rowLayerTotalMultExps[tmp[this.layer].row].times(this.iuf))
 								return eff;
 							},
 						}
