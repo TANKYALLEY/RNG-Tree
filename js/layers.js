@@ -6,7 +6,7 @@ function createLayers() {
 		let layersInRow = RNG_DATA.layers(r);
 		for (let l=1;l<=layersInRow;l++) {
 			let rand = random(seed*random(r*l));
-			let rander = random(seed*random((r+8)*2) +1);
+			let rander = random(seed*random((r+8)*2)+1);
 			let layerName = RNG_DATA.chars[Math.floor(rand*RNG_DATA.chars.length)] + RNG_DATA.chars[Math.floor(rander*RNG_DATA.chars.length)];
 			RNG_DATA.chars = RNG_DATA.chars.filter(x => x!=layerName);
 			let baseResNum = (r==1?0:Math.floor(rand*(Object.keys(ROW_LAYERS[r-1]).length+1)));
@@ -127,7 +127,7 @@ function createLayers() {
 								let amt;
 								if (this.sourceName == "NONE") amt = player.points;
 								else amt = player[this.sourceName].points;
-								eff = new Decimal(amt||0).max(16384).plus(1).mul(10)
+								eff = new Decimal(amt||0).max(16384).plus(1).mul(1.5)
 								if (this.sourceName!="NONE" ? tmp[this.sourceName].type=="static" : false) eff = Decimal.pow(tmp[this.sourceName].base, eff).pow(tmp[this.sourceName].exponent).pow(exp).pow(RNG_DATA.rowLayerTotalMultExps[tmp[this.layer].row].times(this.iuf))
 								else eff = eff.root((this.sourceName=="NONE")?1:tmp[this.sourceName].exponent).pow(exp).pow(RNG_DATA.rowLayerTotalMultExps[tmp[this.layer].row].times(this.iuf)) 
 								return eff;
@@ -187,7 +187,7 @@ function createLayers() {
 								if (this.et == "NONE") exp = new Decimal(2);
 								else exp = tmp[this.et].exponent;
 								let bought = player[this.layer].buyables[this.id];
-								eff = layers[this.layer].buyables[this.id].cost(bought.sub(1)).times(bought.gte(1)?bought.min(5):0).plus(bought.gte(1)?0:1).root(Math.min(tmp[this.layer].exponent, 4)).pow(exp).pow(RNG_DATA.rowLayerTotalMultExps[tmp[this.layer].row].times(this.iuf))
+								eff = layers[this.layer].buyables[this.id].cost(bought.sub(1)).times(bought.gte(1)?bought.min(5):0).plus(bought.gte(1)?0:1).root(Math.min(tmp[this.layer].exponent, 3)).pow(exp).pow(RNG_DATA.rowLayerTotalMultExps[tmp[this.layer].row].times(this.iuf))
 								return eff;
 							},
 						}
