@@ -34,16 +34,16 @@ const RNG_DATA = {
 		10: new Decimal(1e300),
 	},
 	rowBaseExps: {
-		1: new Decimal(0.75),
-		2: new Decimal(0.5),
-		3: new Decimal(0.25),
-		4: new Decimal(0.15),
-		5: new Decimal(0.1),
-		6: new Decimal(0.05),
-		7: new Decimal(0.025),
-		8: new Decimal(0.01),
-		9: new Decimal(0.0025),
-		10: new Decimal(0.001),
+		1: new Decimal(1),
+		2: new Decimal(0.9),
+		3: new Decimal(0.8),
+		4: new Decimal(0.7),
+		5: new Decimal(0.7),
+		6: new Decimal(0.7),
+		7: new Decimal(0.7),
+		8: new Decimal(0.7),
+		9: new Decimal(0.7),
+		10: new Decimal(0.7),
 	},
 	staticRowBaseExps: {
 		1: new Decimal(1),
@@ -58,16 +58,16 @@ const RNG_DATA = {
 		10: new Decimal(3.5),
 	},
 	rowLayerTotalMultExps: {
-		1: new Decimal(0.5),
-		2: new Decimal(0.6),
-		3: new Decimal(0.75),
-		4: new Decimal(0.8),
-		5: new Decimal(0.875),
-		6: new Decimal(0.925),
-		7: new Decimal(0.95),
-		8: new Decimal(0.98),
-		9: new Decimal(0.99),
-		10: new Decimal(1),
+		1: new Decimal(0.75),
+		2: new Decimal(0.8),
+		3: new Decimal(0.85),
+		4: new Decimal(0.9),
+		5: new Decimal(0.95),
+		6: new Decimal(1),
+		7: new Decimal(1.05),
+		8: new Decimal(1.1),
+		9: new Decimal(1.2),
+		10: new Decimal(1.3),
 	},
 }
 
@@ -123,5 +123,6 @@ function globalBuyableEffect(target) {
 	return eff;
 
 }
+
 
 
