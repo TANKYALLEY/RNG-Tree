@@ -77,7 +77,7 @@ function createLayers() {
 					if (et == "NONE") exp = new Decimal(1);
 					else exp = tmp[et].exponent;
 					if (tmp[l] === undefined) return new Decimal(1);
-					let eff = new Decimal(player[l].points||0).max(2).plus(1)
+					let eff = new Decimal(player[l].points||0).max(0.5).plus(1).mul(((rand%8)/8)+1)
 					if (tmp[l].type=="static") eff = Decimal.pow(tmp[l].base, eff.sub(1)).pow(tmp[l].exponent);
 					else eff = eff.root(tmp[l].exponent);
 					
