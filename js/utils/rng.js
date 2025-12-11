@@ -23,9 +23,9 @@ const RNG_DATA = {
 	types: ["normal", "static"],
 	rowReqs: {
 		1: new Decimal(10),
-		2: new Decimal(1e6),
-		3: new Decimal(1e12),
-		4: new Decimal(1e25),
+		2: new Decimal(5e5),
+		3: new Decimal(1e10),
+		4: new Decimal(1e24),
 		5: new Decimal(1e50),
 		6: new Decimal(1e80),
 		7: new Decimal(1e120),
@@ -123,4 +123,5 @@ function globalBuyableEffect(target) {
 	return eff;
 
 }
+
 
