@@ -187,7 +187,7 @@ function createLayers() {
 								if (this.et == "NONE") exp = new Decimal(2);
 								else exp = tmp[this.et].exponent;
 								let bought = player[this.layer].buyables[this.id];
-								eff = layers[this.layer].buyables[this.id].cost(bought.sub(1)).times(bought.gte(1)?bought.min(5):0).plus(bought.gte(1)?0:1).root(tmp[this.layer].exponent).pow(exp*exp).pow(RNG_DATA.rowLayerTotalMultExps[tmp[this.layer].row].times(this.iuf))
+								eff = layers[this.layer].buyables[this.id].cost(bought.sub(1)).times(bought.gte(1)?bought.min(5):0).plus(bought.gte(1)?0:1).root(Math.min(tmp[this.layer].exponent, 4)).pow(exp).pow(RNG_DATA.rowLayerTotalMultExps[tmp[this.layer].row].times(this.iuf))
 								return eff;
 							},
 						}
