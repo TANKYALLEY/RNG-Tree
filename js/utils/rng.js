@@ -34,7 +34,7 @@ const RNG_DATA = {
 		10: new Decimal(1e300),
 	},
 	rowBaseExps: {
-		1: new Decimal(1),
+		1: new Decimal(0.99),
 		2: new Decimal(0.9),
 		3: new Decimal(0.8),
 		4: new Decimal(0.7),
@@ -123,6 +123,7 @@ function globalBuyableEffect(target) {
 	return eff;
 
 }
+
 
 
 
