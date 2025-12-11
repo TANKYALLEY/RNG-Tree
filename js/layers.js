@@ -119,7 +119,7 @@ function createLayers() {
 							layer: layerInfo.name,
 							title: layerInfo.name+String(id),
 							description() { return ((et!="NONE"?tmp[et].type=="static":false)?("Divide "+(et=="NONE"?"point":(et+" point"))+" requirement"):("Multiply "+(et=="NONE"?"point":(et+" point"))+" gain"))+" based on "+(sourceName=="NONE"?"points":(sourceName+" points"))},
-							cost: (r>1&&id==11&&!layerInfo.hasEffect)?new Decimal(1):(Decimal.mul(Decimal.pow(1.4, Decimal.pow((upgRow-1)*layerInfo.upgrades.cols+upgCol, 2)), 2-upgRand).round()),
+							cost: (r>1&&id==11&&!layerInfo.hasEffect)?new Decimal(1):(Decimal.mul(Decimal.pow(1.3, Decimal.pow((upgRow-1)*layerInfo.upgrades.cols+upgCol, 2)), 2-upgRand).round()),
 							effect() { 
 								let exp;
 								if (this.et == "NONE") exp = new Decimal(1);
@@ -127,7 +127,7 @@ function createLayers() {
 								let amt;
 								if (this.sourceName == "NONE") amt = player.points;
 								else amt = player[this.sourceName].points;
-								eff = new Decimal(amt||0).max(4).plus(1)
+								eff = new Decimal(amt||0).max(16384).plus(1)
 								if (this.sourceName!="NONE" ? tmp[this.sourceName].type=="static" : false) eff = Decimal.pow(tmp[this.sourceName].base, eff).pow(tmp[this.sourceName].exponent).pow(exp).pow(RNG_DATA.rowLayerTotalMultExps[tmp[this.layer].row].times(this.iuf))
 								else eff = eff.root((this.sourceName=="NONE")?1:tmp[this.sourceName].exponent).pow(exp).pow(RNG_DATA.rowLayerTotalMultExps[tmp[this.layer].row].times(this.iuf)) 
 								return eff;
@@ -142,8 +142,8 @@ function createLayers() {
 			if (hasBuyables) {
 				let uLeft = layerInfo.nonEffectFactor/(hasUpgrades?2:1);
 				layerInfo.buyables = {
-					rows: Math.floor(random(rand*Math.pow(seed, 2))*Math.min(layerInfo.row+1, 5)+1),
-					cols: Math.floor(random((1-rand)*Math.pow(seed, 2))*Math.min(layerInfo.row+1, 5)+1),
+					rows: Math.floor(random(rand*Math.pow(seed, 2))*Math.min(layerInfo.row+1, 3)+2),
+					cols: Math.floor(random((1-rand)*Math.pow(seed, 2))*Math.min(layerInfo.row+1, 3)+2),
 				}
 				for (let bRow=1;bRow<=layerInfo.buyables.rows;bRow++) {
 					for (let bCol=1;bCol<=layerInfo.buyables.cols;bCol++) {
