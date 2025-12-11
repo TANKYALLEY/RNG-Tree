@@ -127,7 +127,7 @@ function createLayers() {
 								let amt;
 								if (this.sourceName == "NONE") amt = player.points;
 								else amt = player[this.sourceName].points;
-								eff = new Decimal(amt||0).max(16384).plus(1)
+								eff = new Decimal(amt||0).max(16384).plus(1).mul(10)
 								if (this.sourceName!="NONE" ? tmp[this.sourceName].type=="static" : false) eff = Decimal.pow(tmp[this.sourceName].base, eff).pow(tmp[this.sourceName].exponent).pow(exp).pow(RNG_DATA.rowLayerTotalMultExps[tmp[this.layer].row].times(this.iuf))
 								else eff = eff.root((this.sourceName=="NONE")?1:tmp[this.sourceName].exponent).pow(exp).pow(RNG_DATA.rowLayerTotalMultExps[tmp[this.layer].row].times(this.iuf)) 
 								return eff;
