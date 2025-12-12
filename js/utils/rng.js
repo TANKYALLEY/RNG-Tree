@@ -35,15 +35,15 @@ const RNG_DATA = {
 	},
 	rowBaseExps: {
 		1: new Decimal(0.99),
-		2: new Decimal(0.9),
-		3: new Decimal(0.8),
-		4: new Decimal(0.7),
-		5: new Decimal(0.7),
-		6: new Decimal(0.7),
-		7: new Decimal(0.7),
-		8: new Decimal(0.7),
-		9: new Decimal(0.7),
-		10: new Decimal(0.7),
+		2: new Decimal(0.98),
+		3: new Decimal(0.97),
+		4: new Decimal(0.96),
+		5: new Decimal(0.95),
+		6: new Decimal(0.94),
+		7: new Decimal(0.93),
+		8: new Decimal(0.92),
+		9: new Decimal(0.91),
+		10: new Decimal(0.9),
 	},
 	staticRowBaseExps: {
 		1: new Decimal(1),
@@ -55,7 +55,7 @@ const RNG_DATA = {
 		7: new Decimal(2.5),
 		8: new Decimal(2.75),
 		9: new Decimal(3),
-		10: new Decimal(3.5),
+		10: new Decimal(5),
 	},
 	rowLayerTotalMultExps: {
 		1: new Decimal(0.75),
@@ -150,6 +150,7 @@ function globalChallengeEffect(target) {
 	}
 	return reff;
 }
+
 
 
 
