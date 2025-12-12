@@ -69,6 +69,18 @@ const RNG_DATA = {
 		9: new Decimal(1.2),
 		10: new Decimal(1.3),
 	},
+	challengeGoalReq: {
+		1: new Decimal(100),
+		2: new Decimal(1e7),
+		3: new Decimal(1e11),
+		4: new Decimal(1e25),
+		5: new Decimal(1e51),
+		6: new Decimal(1e81),
+		7: new Decimal(1e121),
+		8: new Decimal(1e181),
+		9: new Decimal(1e241),
+		10: new Decimal(1e301),
+	},
 }
 
 function random(seed) {
@@ -97,7 +109,7 @@ function globalUpgEffect(target) {
 				let id = r*10+c;
 				if (!hasUpgrade(l, id)) continue;
 				if (tmp[l].upgrades[id].et == target) {
-					if (target!="NONE"?tmp[target].type=="static":false) eff = eff.div(tmp[l].upgrades[id].effect);
+					if (target!="NONE"?tmp[target].type=="static":false) reff = reff.div(tmp[l].upgrades[id].effect);
 					else eff = eff.times(tmp[l].upgrades[id].effect);
 				}
 			}
@@ -121,8 +133,24 @@ function globalBuyableEffect(target) {
 		}
 	}
 	return eff;
-
 }
+function globalChallengeEffect(target) {
+	let reff = new Decimal(1)
+	for (let l in layers) {
+		if (!tmp[l].challenges) continue;
+		for (let r=1;r<=tmp[l].challenges.rows;r++) {
+			for (let c=1;c<=tmp[l].challenges.cols;c++) {
+				let id = r*10+c;
+				if (tmp[l].challenges[id].et == target) {
+					if (target!="NONE"?tmp[target].type=="static":false) eff = eff.div(tmp[l].challenges[id].rewardEffect);
+					else reff = reff.times(tmp[1].challenges[id].rewardEffect);
+				}
+			}
+		}
+	}
+	return reff;
+}
+
 
 
 
