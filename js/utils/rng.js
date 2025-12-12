@@ -58,12 +58,12 @@ const RNG_DATA = {
 		10: new Decimal(5),
 	},
 	rowLayerTotalMultExps: {
-		1: new Decimal(0.75),
-		2: new Decimal(0.8),
-		3: new Decimal(0.85),
-		4: new Decimal(0.9),
-		5: new Decimal(0.95),
-		6: new Decimal(1),
+		1: new Decimal(0.9),
+		2: new Decimal(0.925),
+		3: new Decimal(0.95),
+		4: new Decimal(0.975),
+		5: new Decimal(1),
+		6: new Decimal(1.025),
 		7: new Decimal(1.05),
 		8: new Decimal(1.1),
 		9: new Decimal(1.2),
@@ -150,6 +150,7 @@ function globalChallengeEffect(target) {
 	}
 	return reff;
 }
+
 
 
 
