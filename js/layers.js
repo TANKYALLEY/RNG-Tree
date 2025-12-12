@@ -62,8 +62,8 @@ function createLayers() {
 			}
 			
 			layerInfo.hasEffect = (r==1?true:(!(!Math.round(rand))))
-			let hasUpgrades = rand<=0.8
-			let hasBuyables = rand>=0.8
+			let hasUpgrades = rand<=0.7
+			let hasBuyables = rand>=0.3
 			let hasMilestones = rand>=0.3
 			layerInfo.overallFactor = 1/layersInRow
 			layerInfo.nonEffectFactor = (hasUpgrades||hasBuyables)?((rand+1)/(layerInfo.type=="static"?5:3)):0
