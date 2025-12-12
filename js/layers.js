@@ -99,8 +99,8 @@ function createLayers() {
 			if (hasUpgrades) {
 				let uLeft = layerInfo.nonEffectFactor/(hasBuyables?2:1);
 				layerInfo.upgrades = {
-					rows: Math.floor(random(rand*seed)*Math.min(layerInfo.row+1, 100)+1),
-					cols: Math.floor(random((1-rand)*seed)*Math.min(layerInfo.row+1, 100)+1),
+					rows: Math.floor(random(rand*seed)*Math.min(2*(layerInfo.row)+1, 100)+1),
+					cols: Math.floor(random((1-rand)*seed)*Math.min(2*(layerInfo.row+1), 100)+1),
 				}
 				for (let upgRow=1;upgRow<=layerInfo.upgrades.rows;upgRow++) {
 					for (let upgCol=1;upgCol<=layerInfo.upgrades.cols;upgCol++) {
