@@ -100,12 +100,12 @@ function createLayers() {
 				let uLeft = layerInfo.nonEffectFactor/(hasBuyables?2:1);
 				layerInfo.upgrades = {
 					rows: Math.floor(random(rand*seed)*Math.min(2*(layerInfo.row)+1, 100)+1),
-					cols: Math.floor(random((1-rand)*seed)*Math.min(2*(layerInfo.row+1), 100)+1),
+					cols: Math.floor(random((1-rand)*seed)*Math.min(2*(layerInfo.row+1), 10)+1),
 				}
 				for (let upgRow=1;upgRow<=layerInfo.upgrades.rows;upgRow++) {
 					for (let upgCol=1;upgCol<=layerInfo.upgrades.cols;upgCol++) {
 						let upgRand = random(seed*upgRow*upgCol);
-						let id = upgRow*100+upgCol;
+						let id = upgRow*10+upgCol;
 						let et = (r==1?"NONE":layersForEffects[r-1][Math.floor((1-upgRand)*layersForEffects[r-1].length)]);
 						let sourceID = Math.round(upgRand*r);
 						let sourceName = (sourceID==0?"NONE":layersForEffects[sourceID][Math.floor(upgRand*layersForEffects[sourceID].length)]);
@@ -142,13 +142,13 @@ function createLayers() {
 			if (hasBuyables) {
 				let uLeft = layerInfo.nonEffectFactor/(hasUpgrades?2:1);
 				layerInfo.buyables = {
-					rows: Math.floor(random(rand*Math.pow(seed, 2))*Math.min(layerInfo.row+1, 3)+2),
-					cols: Math.floor(random((1-rand)*Math.pow(seed, 2))*Math.min(layerInfo.row+1, 3)+2),
+					rows: Math.floor(random(rand*Math.pow(seed, 2))*Math.min(layerInfo.row+1, 6)+2),
+					cols: Math.floor(random((1-rand)*Math.pow(seed, 2))*Math.min(layerInfo.row+1, 6)+2),
 				}
 				for (let bRow=1;bRow<=layerInfo.buyables.rows;bRow++) {
 					for (let bCol=1;bCol<=layerInfo.buyables.cols;bCol++) {
 						let bblRand = random(Math.sqrt(seed)*bRow*bCol)
-						let id = bRow*100+bCol;
+						let id = bRow*10+bCol;
 						let et = (r==1?"NONE":layersForEffects[r-1][Math.floor((1-bblRand)*layersForEffects[r-1].length)]);
 						let isFinal = (bRow == layerInfo.buyables.rows) && (bCol == layerInfo.buyables.cols);
 						let internalBblFactor = isFinal?uLeft:(bblRand/(layerInfo.buyables.rows*layerInfo.buyables.cols));
